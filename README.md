@@ -70,6 +70,8 @@ This enables **early-warning burnout detection**, rather than post-event analysi
 
 ## 🏗️ Project Structure
 
+```text
+
 employee_burnout_detection/
 │
 ├── data/
@@ -92,7 +94,7 @@ employee_burnout_detection/
 │ └── burnout_label_encoder.pkl
 │
 ├── app/
-│ ├── app.py
+│  └── app.py
 │
 ├── requirements.txt
 ├── README.md
