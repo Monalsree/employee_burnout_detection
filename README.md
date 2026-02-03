@@ -36,7 +36,7 @@ There is a need for an **AI-driven, predictive, and scalable solution** that can
 - 🧠 Custom-engineered burnout risk feature (novel approach)
 - 📊 Exploratory Data Analysis (EDA) for insight validation
 - 🤖 Optimized **XGBoost** model for prediction
-- 🌐 Multi-page **Streamlit dashboard**
+
 - 📦 Modular and reusable ML architecture
 
 ---
