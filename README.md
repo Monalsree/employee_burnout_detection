@@ -1,14 +1,15 @@
 # 🧠 Employee Burnout Early-Warning System (AI-Based)
 
-An **AI-powered employee burnout prediction system** designed to identify burnout risk **before attrition or performance decline**, enabling **proactive HR intervention**.
+An **AI-powered employee burnout prediction system** designed to identify burnout risk **before attrition or performance decline**, enabling proactive HR intervention.
 
-This project leverages **machine learning (XGBoost)** and **custom feature engineering** on objective HR data to support intelligent, data-driven decision-making.
+This project leverages **machine learning (XGBoost)** and custom feature engineering on objective HR data to support intelligent, data-driven decision-making.
 
 ---
 
 ## 🚀 Problem Statement
 
-Employee burnout is a critical challenge in modern organizations, impacting employee well-being, productivity, and retention.  
+Employee burnout is a critical challenge in modern organizations, impacting employee well-being, productivity, and retention.
+
 Most existing burnout detection systems are:
 
 - Reactive instead of predictive  
@@ -33,17 +34,17 @@ There is a need for an **AI-driven, predictive, and scalable solution** that can
 ## 🧩 Key Features
 
 - 🔍 Predicts **Burnout Risk** (Low / Medium / High)
-- 🧠 Custom-engineered burnout risk feature (novel approach)
-- 📊 Exploratory Data Analysis (EDA) for insight validation
+- 🧠 Custom-engineered burnout risk feature
+- 📊 Exploratory Data Analysis (EDA)
 - 🤖 Optimized **XGBoost** model for prediction
-
 - 📦 Modular and reusable ML architecture
 
 ---
 
 ## 🧠 Burnout Risk Feature Engineering (Novelty)
 
-Burnout is not directly available as a label in HR datasets.  
+Burnout is not directly available as a label in HR datasets.
+
 This project introduces a **custom Burnout_Risk label** engineered using weighted objective indicators:
 
 - Overtime workload  
@@ -59,7 +60,7 @@ This enables **early-warning burnout detection**, rather than post-event analysi
 ## 🤖 Algorithms Used
 
 | Algorithm | Purpose |
-|---------|--------|
+|------------|----------|
 | Logistic Regression | Baseline model |
 | Random Forest | Ensemble comparison |
 | **XGBoost** | **Final optimized model** |
@@ -93,37 +94,29 @@ employee_burnout_detection/
 │   └── burnout_label_encoder.pkl
 │
 ├── app/
-<<<<<<< HEAD
-│  └── app.py
-=======
-│   ├── app.py
->>>>>>> 71e48db (readme)
+│   └── app.py
 │
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 
-<<<<<<< HEAD
 ```
-=======
->>>>>>> 71e48db (readme)
----
 
-## 🌐 Deployment (Streamlit Application)
+🌐 Deployment (Streamlit Application)
+The trained XGBoost model is deployed using Streamlit, providing:
 
-The trained XGBoost model is deployed using **Streamlit**, providing:
+Interactive user interface
 
-- Interactive user interface  
-- Multi-page navigation  
-- HR-friendly explanations  
-- Actionable recommendations  
+Clean prediction layout
 
-### ▶️ Run the application locally:
-```bash
+HR-friendly explanations
+
+Actionable recommendations
+
+▶️ Run the application locally:
 streamlit run app/app.py
-
 📊 Results & Insights
-XGBoost achieved the best performance compared to baseline models
+XGBoost achieved the best performance compared to baseline models.
 
 Burnout risk shows strong correlation with:
 
@@ -133,8 +126,7 @@ Poor work-life balance
 
 Low satisfaction metrics
 
-The system successfully identifies early burnout signals
-
+The system successfully identifies early burnout signals.
 
 👩‍💻 Author
 Monal Sree P
