@@ -100,7 +100,7 @@ employee_burnout_detection/
 ├── README.md
 └── .gitignore
 
-
+```
 ---
 
 ## 🌐 Deployment (Streamlit Application)
