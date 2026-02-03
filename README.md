@@ -93,7 +93,6 @@ employee_burnout_detection/
 │
 ├── app/
 │ ├── app.py
-│ └── pages/
 │
 ├── requirements.txt
 ├── README.md
