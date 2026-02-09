@@ -1,8 +1,10 @@
+# Ignore raw and processed data
 data/raw/*.csv
 data/processed/*.csv
-#models/*.pkl
+
+# Python cache
 __pycache__/
-*.pyc#
+*.pyc
 
 # Jupyter
 .ipynb_checkpoints/
@@ -10,9 +12,6 @@ __pycache__/
 # Virtual environments
 venv/
 .env/
-
-# ML models
-models/*.pkl
 
 # OS files
 .DS_Store
