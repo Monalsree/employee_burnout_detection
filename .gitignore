@@ -2,7 +2,7 @@ data/raw/*.csv
 data/processed/*.csv
 #models/*.pkl
 __pycache__/
-*.pyc
+*.pyc#
 
 # Jupyter
 .ipynb_checkpoints/
