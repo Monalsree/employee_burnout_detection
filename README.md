@@ -71,10 +71,6 @@ This enables **early-warning burnout detection**, rather than post-event analysi
 ## 🏗️ Project Structure
 
 ```text
-<<<<<<< HEAD
-
-=======
->>>>>>> 71e48db (readme)
 employee_burnout_detection/
 │
 ├── data/
