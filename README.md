@@ -71,36 +71,46 @@ This enables **early-warning burnout detection**, rather than post-event analysi
 ## 🏗️ Project Structure
 
 ```text
+<<<<<<< HEAD
 
+=======
+>>>>>>> 71e48db (readme)
 employee_burnout_detection/
 │
 ├── data/
-│ ├── raw/
-│ └── processed/
+│   ├── raw/
+│   └── processed/
 │
 ├── notebooks/
-│ ├── 01_data_understanding.ipynb
-│ ├── 02_data_cleaning.ipynb
-│ ├── 03_eda.ipynb
-│ └── 04_modeling.ipynb
+│   ├── 01_data_understanding.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   ├── 03_eda.ipynb
+│   └── 04_modeling.ipynb
 │
 ├── src/
-│ ├── preprocessing.py
-│ ├── features.py
-│ └── model.py
+│   ├── preprocessing.py
+│   ├── features.py
+│   └── model.py
 │
 ├── models/
-│ ├── burnout_xgboost_model.pkl
-│ └── burnout_label_encoder.pkl
+│   ├── burnout_xgboost_model.pkl
+│   └── burnout_label_encoder.pkl
 │
 ├── app/
+<<<<<<< HEAD
 │  └── app.py
+=======
+│   ├── app.py
+>>>>>>> 71e48db (readme)
 │
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 
+<<<<<<< HEAD
 ```
+=======
+>>>>>>> 71e48db (readme)
 ---
 
 ## 🌐 Deployment (Streamlit Application)
