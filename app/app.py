@@ -1,6 +1,19 @@
 import streamlit as st
 import base64
 from pathlib import Path
+import pandas as pd
+import joblib
+
+# ─────────── LOAD TRAINED MODEL ───────────
+@st.cache_resource
+def load_model():
+    base_path = Path(__file__).resolve().parent.parent
+    model = joblib.load(base_path / "models" / "burnout_xgboost_model.pkl")
+    encoder = joblib.load(base_path / "models" / "burnout_label_encoder.pkl")
+    return model, encoder
+
+model, encoder = load_model()
+
 
 # ─────────── PAGE CONFIG ───────────
 st.set_page_config(
@@ -162,56 +175,62 @@ elif page == "🔍 Assessment":
         predict_btn = st.button("🔍 Predict Burnout Risk")
         reset_btn   = st.button("↺ Reset")
 
-        if predict_btn:
-            # Model logic (mirrors Python model)
-            score = 0
-            if overtime == "Yes":        score += 30
-            score += (4 - work_life_balance) * 10
-            score += (4 - job_satisfaction) * 8
-            score += (4 - env_satisfaction) * 7
-            if monthly_income < 3000:    score += 15
-            elif monthly_income < 6000:  score += 8
-            if attrition == "Yes":       score += 12
-            if years_at_company > 15:    score += 5
-            if performance_rating >= 3 and overtime == "Yes": score += 10
+       if predict_btn:
+    input_df = pd.DataFrame({
+        "Age": [age],
+        "YearsAtCompany": [years_at_company],
+        "MonthlyIncome": [monthly_income],
+        "OverTime": [1 if overtime == "Yes" else 0],
+        "WorkLifeBalance": [work_life_balance],
+        "JobSatisfaction": [job_satisfaction],
+        "EnvironmentSatisfaction": [env_satisfaction],
+        "Attrition": [1 if attrition == "Yes" else 0],
+        "PerformanceRating": [performance_rating],
+    })
 
-            risk = "High" if score >= 55 else ("Medium" if score >= 30 else "Low")
+    with st.spinner("AI model analyzing indicators..."):
+        prediction = model.predict(input_df)
+        risk = encoder.inverse_transform(prediction)[0]
+        probability = model.predict_proba(input_df).max() * 100
 
-            with st.spinner("AI model analyzing indicators..."):
-                import time; time.sleep(1.0)
+    st.markdown("---")
 
-            st.markdown("---")
-            if risk == "High":
-                st.markdown('<div class="risk-high">', unsafe_allow_html=True)
-                st.error("🚨 HIGH BURNOUT RISK")
-                st.markdown("""**Recommended HR Actions:**
+    if risk == "High":
+        st.markdown('<div class="risk-high">', unsafe_allow_html=True)
+        st.error(f"🚨 HIGH BURNOUT RISK ({probability:.2f}% confidence)")
+        st.markdown("""
+**Recommended HR Actions:**
 - 🔴 Immediate workload review
 - 💬 Schedule 1-on-1 this week
-- 🧠 Offer mental health & flexibility support""")
-                st.markdown('</div>', unsafe_allow_html=True)
-            elif risk == "Medium":
-                st.markdown('<div class="risk-medium">', unsafe_allow_html=True)
-                st.warning("⚠️ MEDIUM BURNOUT RISK")
-                st.markdown("""**Recommended HR Actions:**
+- 🧠 Offer mental health & flexibility support
+""")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    elif risk == "Medium":
+        st.markdown('<div class="risk-medium">', unsafe_allow_html=True)
+        st.warning(f"⚠️ MEDIUM BURNOUT RISK ({probability:.2f}% confidence)")
+        st.markdown("""
+**Recommended HR Actions:**
 - 📊 Monitor workload trends closely
 - 🌴 Encourage PTO utilization
-- 📅 Schedule regular check-ins""")
-                st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                st.markdown('<div class="risk-low">', unsafe_allow_html=True)
-                st.success("✅ LOW BURNOUT RISK")
-                st.markdown("""**Status:**
+- 📅 Schedule regular check-ins
+""")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    else:
+        st.markdown('<div class="risk-low">', unsafe_allow_html=True)
+        st.success(f"✅ LOW BURNOUT RISK ({probability:.2f}% confidence)")
+        st.markdown("""
+**Status:**
 - ✅ Healthy work conditions detected
 - 🏆 Sustain & reward positive practices
-- 📅 Quarterly review recommended""")
-                st.markdown('</div>', unsafe_allow_html=True)
+- 📅 Quarterly review recommended
+""")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-            # Score breakdown
-            st.markdown("---")
-            st.markdown(f"**Risk Score:** `{min(score, 100)}/100`")
-            st.progress(min(score / 100, 1.0))
-
-        st.caption("⚠️ Decision-support tool only. Not a medical diagnosis.")
+    st.markdown("---")
+    st.markdown(f"### Model Confidence: {probability:.2f}%")
+    st.progress(probability / 100)
 
 # ═══════════════════════════════════
 #  PAGE: DASHBOARD
